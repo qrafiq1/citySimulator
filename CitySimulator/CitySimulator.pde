@@ -1,10 +1,11 @@
 Drop[] drops= new Drop[200];
 Snow[] snows= new Snow[200];
 
-//FIX: lights,night code, car to repeat
+//FIX: lights,night code, car to flip
 
 PImage car; //car image
-float vx; //velocity of car
+float vx=-150; //velocity of car 1
+float vx2=700; // velocity of car 2
 float green;
 float blue;
 
@@ -26,8 +27,18 @@ void draw()
 {
   time();
   road();
-  image(car, 0+vx, 560, 150, 100);
-  vx++;
+  image(car, vx, 560, 150, 100);
+  vx=vx+2;
+  if (vx >= 700) {
+    vx=-150;
+  }
+  pushMatrix();
+ // scale(-1,1);
+  image(car, vx2, 685, 150,100);
+  popMatrix();
+  vx2=vx2-2;
+  if (vx2 <= -150) {
+    vx2=700; }
   building(0, 150);
   building(200, 150);
   building(400, 150);
