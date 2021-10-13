@@ -1,6 +1,8 @@
 Drop[] drops= new Drop[200];
 Snow[] snows= new Snow[200];
 
+//FIX: lights,night code, car to repeat
+
 PImage car; //car image
 float vx; //velocity of car
 float green;
@@ -22,7 +24,7 @@ void setup()
 
 void draw()
 {
-  background(0, green, blue);
+  time();
   road();
   image(car, 0+vx, 560, 150, 100);
   vx++;
@@ -30,42 +32,45 @@ void draw()
   building(200, 150);
   building(400, 150);
   building(600, 150);
-    noStroke();
-    weather();
+  weather();
+  noStroke();
 }
 
 void weather()
 {
   if (key=='r') {
     for (int i=0; i<drops.length; i++) {
-    drops[i].show();
-    drops[i].fall(); }
-    //2d array to make rain
-    //can also control intensity
+      drops[i].show();
+      drops[i].fall();
+    }
   }
   if (key=='s') {
     for (int k=0; k<snows.length; k++) {
-    snows[k].show();
-    snows[k].fall(); }
-    //2d array to make snow
-  }
-  if (key=='c') {
-    //back to a clear day
+      snows[k].show();
+      snows[k].fall();
+    }
   }
 }
 
 void building(float xPos, float yPos)
 {
-  fill(255, 200, 0);
+  fill(80, 25, 33);
   rect(xPos, yPos, 150, height/2.07);
   fill(0);
   for (int y=0; y<280; y=y+70) {
     for (int x=0; x<140; x=x+70) {
       rect(xPos+20+x, 170+y, 40, 50);
+      if (key == 'l') {
+        fill(#FAFF00);
+      } else {
+        fill(0);
+      }
     }
   }
   fill(#964B00);
   rect(xPos+60, 460, 40, 75);
+  fill(#FAFF00);
+  circle(xPos+65, 497.5, 5);
   noStroke();
 }
 
@@ -79,3 +84,19 @@ void road()
     noStroke();
   }
 }
+
+void time()
+{
+  if (key=='n') {
+    background(0, 4, 77);  //0,4,77
+  } else
+  {
+    background(0, green, blue);
+  }
+  if (key=='d') {
+    background(0, 170, 252);
+  }
+}
+
+//for(int p=0; p<166; p=p+1){
+//     for(int r=0; r<175; r=r+1){
