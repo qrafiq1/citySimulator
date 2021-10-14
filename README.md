@@ -9,6 +9,8 @@ d = day time
 r = rain
 s = snow
 c = clear
+o = lights on
+f = lights off
 
 
 
