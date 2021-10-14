@@ -1,7 +1,7 @@
 Drop[] drops= new Drop[400];
 Snow[] snows= new Snow[200];
 
-PImage car; //car image
+PImage car, car2; //car images
 float vx=-150; //velocity of car 1
 float vx2=700; // velocity of car 2
 float green;
@@ -11,12 +11,14 @@ boolean snowing= false;
 boolean lighting= false;
 boolean night= false;
 boolean day=false;
+boolean lights=false;
 
 void setup()
 {
   green=170;
   blue=252;
   car= loadImage("car.png");
+  car2= loadImage("car2.png");
   size(700, 800);
   for (int i=0; i<drops.length; i++) {
     drops[i] = new Drop();
@@ -35,13 +37,11 @@ void draw()
   if (vx >= 700) {
     vx=-150;
   }
-  pushMatrix();
-  //scale(1,-1);
-  image(car, vx2, 685, 150,100);
-  popMatrix();
+  image(car2, vx2, 685, 150, 100);
   vx2=vx2-2;
   if (vx2 <= -150) {
-    vx2=700; }
+    vx2=700;
+  }
   building(0, 150);
   building(200, 150);
   building(400, 150);
@@ -51,12 +51,12 @@ void draw()
 }
 
 void weather()
-{ 
+{
   if (key=='r') {
     raining=true;
     snowing=false;
   }
-  if(raining== true) {
+  if (raining== true) {
     for (int i=0; i<drops.length; i++) {
       drops[i].show();
       drops[i].fall();
@@ -66,7 +66,7 @@ void weather()
     snowing=true;
     raining=false;
   }
-  if(snowing==true) {
+  if (snowing==true) {
     for (int k=0; k<snows.length; k++) {
       snows[k].show();
       snows[k].fall();
@@ -86,9 +86,18 @@ void building(float xPos, float yPos)
   for (int y=0; y<280; y=y+70) {
     for (int x=0; x<140; x=x+70) {
       rect(xPos+20+x, 170+y, 40, 50);
-      if (key == 'l') {
+      if (key == 'o') {
+        lights=true;
+      }
+      if (lights==true) {
         fill(#FAFF00);
       } else {
+        fill(0);
+      }
+      if (key == 'f') {
+        lights=false;
+      }
+      if (lights==false) {
         fill(0);
       }
     }
@@ -117,7 +126,7 @@ void time()
     night=true;
     day=false;
   }
-  if (night==true){
+  if (night==true) {
     background(0, 4, 77);  //0,4,77
   } else
   {
