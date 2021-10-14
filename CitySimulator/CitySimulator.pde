@@ -36,7 +36,7 @@ void draw()
     vx=-150;
   }
   pushMatrix();
- // scale(-1,1);
+  //scale(1,-1);
   image(car, vx2, 685, 150,100);
   popMatrix();
   vx2=vx2-2;
