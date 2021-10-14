@@ -1,13 +1,16 @@
-Drop[] drops= new Drop[200];
+Drop[] drops= new Drop[400];
 Snow[] snows= new Snow[200];
-
-//FIX: lights,night code, car to flip
 
 PImage car; //car image
 float vx=-150; //velocity of car 1
 float vx2=700; // velocity of car 2
 float green;
 float blue;
+boolean raining= false;
+boolean snowing= false;
+boolean lighting= false;
+boolean night= false;
+boolean day=false;
 
 void setup()
 {
@@ -48,18 +51,30 @@ void draw()
 }
 
 void weather()
-{
+{ 
   if (key=='r') {
+    raining=true;
+    snowing=false;
+  }
+  if(raining== true) {
     for (int i=0; i<drops.length; i++) {
       drops[i].show();
       drops[i].fall();
     }
   }
   if (key=='s') {
+    snowing=true;
+    raining=false;
+  }
+  if(snowing==true) {
     for (int k=0; k<snows.length; k++) {
       snows[k].show();
       snows[k].fall();
     }
+  }
+  if (key=='c') {
+    snowing=false;
+    raining=false;
   }
 }
 
@@ -99,15 +114,20 @@ void road()
 void time()
 {
   if (key=='n') {
+    night=true;
+    day=false;
+  }
+  if (night==true){
     background(0, 4, 77);  //0,4,77
   } else
   {
     background(0, green, blue);
   }
   if (key=='d') {
+    day=true;
+    night=false;
+  }
+  if (day==true) {
     background(0, 170, 252);
   }
 }
-
-//for(int p=0; p<166; p=p+1){
-//     for(int r=0; r<175; r=r+1){
